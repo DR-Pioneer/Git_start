@@ -85,3 +85,7 @@ pull = fetch + merge
 git clone + 复制的github地址
 
 git remote -v吗？用它看一下你下下来的本地仓库连接上那个远程仓库没。
+
+
+
+10 \hahahah
