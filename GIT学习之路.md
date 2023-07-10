@@ -43,11 +43,14 @@ git push origin master -f  强制推送 可能会覆盖掉远程的数据
 
 ### 7、查看命令提交记录
 
-git log
+- git log
+
+- git log --pretty=oneline
 
 抢救commit的注释
 
-git commit --amend -m "修改的内容"
+- git commit --amend -m "修改的内容"
+
 
 ### 8、文件下拉
 
@@ -85,6 +88,69 @@ pull = fetch + merge
 git clone + 复制的github地址
 
 git remote -v吗？用它看一下你下下来的本地仓库连接上那个远程仓库没。
+
+
+
+### 10、git分支
+
+```git
+git branch: 查看当前仓库的分支情况
+git branch + 分支名称：创建新的分支
+切换分支：
+    git checkout + 分支名称：切换到新分支下
+    git switch + 分支名称：切换到新分支下(高版本下)
+恢复文件到上一个版本：
+	git checkout + <commit-id> / <commit-sha>
+合并分支：（切换到主分支下后，执行）
+	git merge dev(分支)
+中止合并：	
+	git merge --abort
+分支删除：
+	git branch -d + 分支名 （只删除已完成合并的分支）
+	git branch -D + 分支名 （强制删除分支）
+
+合并->冲突
+	git diff: 查看冲突内容
+	
+HEAD指针：
+	指向不同分支最新的提交纪录，不同的分支会有一个共同的提交祖先
+```
+
+### 11、git几种模式的使用
+
+```git
+一、git对自己仓库的使用，权限是不受控制的,随意拉取，释放
+二、git团队协作时，按权限分为两种模式：
+   1、社区仓库禁止其他人直接修改，需fork到自己的仓库中，修改完成后，向社区仓库提交merge申请
+   2、master，other branch分支可以作为团队协作的形式，但这是一种默契约定，团队内的成员依然能够切换到主分支直接merge其他分支。
+```
+
+### 12、git 回退命令
+
+```
+一、git reset [--soft --mixed(默认) --hard] <commit id>
+soft: 回退到某一版本，保留工作区和暂存区的内容
+hard: 回退到某一版本，丢弃工作区和暂存区的内容
+mixed: 回退到某一版本，只保留工作区，丢弃暂存区的内容
+
+git ls-files 显示暂存区中全部文件的路径
+```
+
+### 13、git push失败
+
+```
+当我们在github版本库中发现一个问题后，你在github上对它进行了在线的修改；或者你直接在github上的某个库中添加readme文件或者其他什么文件，但是没有对本地库进行同步。这个时候当你再次有commit想要从本地库提交到远程的github库中时就会出现push失败的问题。
+问题：problem->failed to push some....
+解决方案：-> git pull --rebase + "仓库名字" + master(分支名字)
+原理：-> 将远程库的更新合并到本地库中，rebase取消本地库刚才的commit,并将其接到更新后的版本库中
+
+```
+
+
+
+
+
+
 
 
 
